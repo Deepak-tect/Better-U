@@ -22,16 +22,22 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Demographics demographics;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Patient patient;
+
     public User() {
     }
 
-    public User(int id, String username, String password, Role roles, Demographics demographics) {
+    public User(int id, String username, String password, Role role, Demographics demographics, Patient patient) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.role = roles;
+        this.role = role;
         this.demographics = demographics;
+        this.patient = patient;
     }
+
+
 
     public int getId() {
         return id;
@@ -71,6 +77,15 @@ public class User {
 
     public void setDemographics(Demographics demographics) {
         this.demographics = demographics;
+    }
+    
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     @Override

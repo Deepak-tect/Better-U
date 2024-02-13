@@ -8,10 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.healthcare.healthcare.Exceptions.ResourceNotFoundExecption;
 import com.healthcare.healthcare.Models.Demographics;
+import com.healthcare.healthcare.Models.Patient;
 import com.healthcare.healthcare.Models.Role;
 import com.healthcare.healthcare.Models.User;
+import com.healthcare.healthcare.Payloads.ResponsePatients;
 import com.healthcare.healthcare.Payloads.ResponseUser;
 import com.healthcare.healthcare.Repositories.DemographicRepo;
+import com.healthcare.healthcare.Repositories.PatientRepo;
 import com.healthcare.healthcare.Repositories.RoleRepo;
 import com.healthcare.healthcare.Repositories.UserRepo;
 import com.healthcare.healthcare.Services.UserService;
@@ -30,6 +33,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private DemographicRepo demographicRepo;
+
+    @Autowired
+    private PatientRepo patientRepo;
 
     @Override
     public ResponseUser createUser(ResponseUser respnseUser) {
@@ -74,6 +80,25 @@ public class UserServiceImpl implements UserService {
             return this.modelMapper.map(optional.get(), ResponseUser.class);
         }
         throw new ResourceNotFoundExecption("User", "email", 0);
+    }
+
+    @Override
+    public ResponsePatients addPatient(ResponsePatients responsePatients) {
+        int userId = responsePatients.getId();
+        Optional<User> optional = this.userRepo.findById(userId);
+        if(optional.isPresent()){
+            User user = optional.get();
+            Patient patient = this.modelMapper.map(responsePatients, Patient.class);
+            patient.setUser(user);
+            user.setPatient(patient);
+            Patient createPatient = this.patientRepo.save(patient);
+            this.userRepo.save(user);
+            ResponsePatients result = this.modelMapper.map(createPatient, ResponsePatients.class);
+            result.getUser().setRole(user.getRoles().getId());
+            return result;
+
+        }
+        throw new ResourceNotFoundExecption("User", "id", userId);
     }
     
     
