@@ -54,6 +54,27 @@ public class UserServiceImpl implements UserService {
         result.setRole(user.getRoles().getId());
         return result;
     }
+
+    @Override
+    public ResponseUser getUserById(int id) {
+        Optional<User> optional = this.userRepo.findById(id);
+        if(optional.isPresent()){
+            User user = optional.get();
+            ResponseUser responseUser = this.modelMapper.map(user, ResponseUser.class);
+            responseUser.setRole(user.getRoles().getId());
+            return responseUser;
+        }
+        throw new ResourceNotFoundExecption("User", "id", id);
+    }
+
+    @Override
+    public ResponseUser checkEmail(String email) {
+        Optional<User> optional = this.userRepo.findByUsername(email);
+        if(optional.isPresent()){
+            return this.modelMapper.map(optional.get(), ResponseUser.class);
+        }
+        throw new ResourceNotFoundExecption("User", "email", 0);
+    }
     
     
 }
