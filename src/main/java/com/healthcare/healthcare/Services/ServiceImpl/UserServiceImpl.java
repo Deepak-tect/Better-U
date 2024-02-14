@@ -8,12 +8,18 @@ import org.springframework.stereotype.Service;
 
 import com.healthcare.healthcare.Exceptions.ResourceNotFoundExecption;
 import com.healthcare.healthcare.Models.Demographics;
+import com.healthcare.healthcare.Models.Doctor;
+import com.healthcare.healthcare.Models.DoctorDetails;
 import com.healthcare.healthcare.Models.Patient;
 import com.healthcare.healthcare.Models.Role;
 import com.healthcare.healthcare.Models.User;
+import com.healthcare.healthcare.Payloads.ResponseDoctor;
+import com.healthcare.healthcare.Payloads.ResponseDoctorDetail;
 import com.healthcare.healthcare.Payloads.ResponsePatients;
 import com.healthcare.healthcare.Payloads.ResponseUser;
 import com.healthcare.healthcare.Repositories.DemographicRepo;
+import com.healthcare.healthcare.Repositories.DoctorDetailRepo;
+import com.healthcare.healthcare.Repositories.DoctorRepo;
 import com.healthcare.healthcare.Repositories.PatientRepo;
 import com.healthcare.healthcare.Repositories.RoleRepo;
 import com.healthcare.healthcare.Repositories.UserRepo;
@@ -36,6 +42,13 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private PatientRepo patientRepo;
+
+    @Autowired
+    private DoctorRepo doctorRepo;
+
+    @Autowired
+    private DoctorDetailRepo doctorDetailRepo;
+
 
     @Override
     public ResponseUser createUser(ResponseUser respnseUser) {
@@ -97,6 +110,27 @@ public class UserServiceImpl implements UserService {
             result.getUser().setRole(user.getRoles().getId());
             return result;
 
+        }
+        throw new ResourceNotFoundExecption("User", "id", userId);
+    }
+
+    @Override
+    public ResponseDoctor addDoctor(ResponseDoctor responseDoctor) {
+        int userId = responseDoctor.getId();
+        Optional<User> optional = this.userRepo.findById(userId);
+        if(optional.isPresent()){
+            User user = optional.get();
+            Doctor doctor = new Doctor();
+            DoctorDetails doctorDetails = new DoctorDetails();
+            modelMapper.map(responseDoctor.getDoctorDetails(), doctorDetails);
+            doctor.setUser(user);
+            doctorDetails.setDoctor(doctor);
+            DoctorDetails createDoctorDetail = this.doctorDetailRepo.save(doctorDetails);
+            Doctor createDoctor = this.doctorRepo.save(doctor);
+            ResponseDoctor result = this.modelMapper.map(createDoctor, ResponseDoctor.class);
+            result.setDoctorDetails(this.modelMapper.map(createDoctorDetail, ResponseDoctorDetail.class));
+            result.getDoctorDetails().setUser(this.modelMapper.map(user, ResponseUser.class));
+            return this.modelMapper.map(result, ResponseDoctor.class);
         }
         throw new ResourceNotFoundExecption("User", "id", userId);
     }

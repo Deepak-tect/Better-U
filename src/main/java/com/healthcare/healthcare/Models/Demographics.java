@@ -2,6 +2,8 @@ package com.healthcare.healthcare.Models;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.MapsId;
@@ -19,6 +21,7 @@ public class Demographics {
     
     @OneToOne
     @MapsId
+    @JsonBackReference
     private User user;
     public Demographics() {
     }

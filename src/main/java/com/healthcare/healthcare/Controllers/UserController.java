@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.healthcare.healthcare.Payloads.ResponseDoctor;
 import com.healthcare.healthcare.Payloads.ResponsePatients;
 import com.healthcare.healthcare.Payloads.ResponseUser;
 import com.healthcare.healthcare.Services.UserService;
@@ -51,6 +52,12 @@ public class UserController {
     public ResponseEntity<ApiResponse<ResponsePatients>> addPatient(@RequestBody ResponsePatients entity) {
         ResponsePatients responsePatients = this.userService.addPatient(entity);
         return new ResponseEntity<>(new ApiResponse<>(201, responsePatients , "Successfully added parent"),HttpStatus.CREATED);
+    }
+
+    @PostMapping("/add-doctor")
+    public ResponseEntity<ApiResponse<ResponseDoctor>> addDoctor(@RequestBody ResponseDoctor entity) {
+        ResponseDoctor responseDoctor = this.userService.addDoctor(entity);
+        return new ResponseEntity<>(new ApiResponse<>(201, responseDoctor , "Successfully added doctor"),HttpStatus.CREATED);
     }
     
     

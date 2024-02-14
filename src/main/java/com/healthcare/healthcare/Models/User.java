@@ -1,6 +1,8 @@
 package com.healthcare.healthcare.Models;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -20,24 +22,42 @@ public class User {
     private Role role;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
     private Demographics demographics;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
     private Patient patient;
+
+
+    @OneToOne(mappedBy = "user" , cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private Doctor doctor;
 
     public User() {
     }
 
-    public User(int id, String username, String password, Role role, Demographics demographics, Patient patient) {
+    public User(int id, String username, String password, Role role, Demographics demographics, Patient patient,
+            Doctor doctor) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
         this.demographics = demographics;
         this.patient = patient;
+        this.doctor = doctor;
     }
 
 
+    
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
 
     public int getId() {
         return id;
@@ -88,12 +108,7 @@ public class User {
         this.patient = patient;
     }
 
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", username=" + username + ", password=" + password + ", roles=" + role
-                + ", demographics=" + demographics + "]";
-    }
-
     
+
 
 }
