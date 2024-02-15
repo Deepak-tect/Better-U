@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.healthcare.healthcare.Exceptions.ResourceNotFoundExecption;
@@ -52,6 +53,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private DoctorDetailRepo doctorDetailRepo;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     @Override
     public ResponseUser createUser(ResponseUser respnseUser) {
@@ -64,6 +68,7 @@ public class UserServiceImpl implements UserService {
         Optional<Role> role = this.roleRepo.findById(respnseUser.getRole());
         User user = modelMapper.map(respnseUser, User.class);
         user.setRoles(role.get());
+        user.setPassword(passwordEncoder.encode(respnseUser.getPassword()));
         
         Demographics demographics = user.getDemographics();
         demographics.setUser(user);
