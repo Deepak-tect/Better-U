@@ -1,5 +1,7 @@
 package com.healthcare.healthcare.Services.ServiceImpl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
@@ -13,6 +15,7 @@ import com.healthcare.healthcare.Models.DoctorDetails;
 import com.healthcare.healthcare.Models.Patient;
 import com.healthcare.healthcare.Models.Role;
 import com.healthcare.healthcare.Models.User;
+import com.healthcare.healthcare.Payloads.ResponseDemographics;
 import com.healthcare.healthcare.Payloads.ResponseDoctor;
 import com.healthcare.healthcare.Payloads.ResponseDoctorDetail;
 import com.healthcare.healthcare.Payloads.ResponsePatients;
@@ -134,6 +137,34 @@ public class UserServiceImpl implements UserService {
         }
         throw new ResourceNotFoundExecption("User", "id", userId);
     }
-    
+
+    @Override
+    public List<ResponseDoctor> getAllDoctor() {
+        List<Doctor> doctors = this.doctorRepo.findAll();
+        List<ResponseDoctor> result = new ArrayList<>();
+        for(Doctor doctor : doctors){
+            result.add(this.modelMapper.map(doctor, ResponseDoctor.class));
+        }
+        return result;
+    }
+
+    @Override
+    public ResponseUser getUserFromEmail(String email) {
+        Optional<User> optional = this.userRepo.findByUsername(email);
+        if(optional.isPresent()){
+            return this.modelMapper.map(optional.get(), ResponseUser.class);
+        }
+        throw new ResourceNotFoundExecption("User", "email", 0);
+    }
+
+    @Override
+    public ResponseDemographics getUserDemographics(int id) {
+        Optional<Demographics> optional = this.demographicRepo.findById(id);
+        if(optional.isPresent()){
+            Demographics demographics = optional.get();
+            return this.modelMapper.map(demographics, ResponseDemographics.class);
+        }
+        throw new ResourceNotFoundExecption("User", "email", 0);
+    }
     
 }

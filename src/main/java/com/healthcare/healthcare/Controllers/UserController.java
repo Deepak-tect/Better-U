@@ -1,5 +1,7 @@
 package com.healthcare.healthcare.Controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.healthcare.healthcare.Payloads.ResponseDemographics;
 import com.healthcare.healthcare.Payloads.ResponseDoctor;
 import com.healthcare.healthcare.Payloads.ResponsePatients;
 import com.healthcare.healthcare.Payloads.ResponseUser;
@@ -49,16 +52,39 @@ public class UserController {
     }
 
     @PostMapping("/add-patient")
-    public ResponseEntity<ApiResponse<ResponsePatients>> addPatient(@RequestBody ResponsePatients entity) {
+    public ResponseEntity<ApiResponse<ResponsePatients>> addPatientController(@RequestBody ResponsePatients entity) {
         ResponsePatients responsePatients = this.userService.addPatient(entity);
         return new ResponseEntity<>(new ApiResponse<>(201, responsePatients , "Successfully added parent"),HttpStatus.CREATED);
     }
 
     @PostMapping("/add-doctor")
-    public ResponseEntity<ApiResponse<ResponseDoctor>> addDoctor(@RequestBody ResponseDoctor entity) {
+    public ResponseEntity<ApiResponse<ResponseDoctor>> addDoctorController(@RequestBody ResponseDoctor entity) {
+        // only admin able to do this
         ResponseDoctor responseDoctor = this.userService.addDoctor(entity);
         return new ResponseEntity<>(new ApiResponse<>(201, responseDoctor , "Successfully added doctor"),HttpStatus.CREATED);
     }
+
+    @GetMapping("/get-doctors")
+    public ResponseEntity<ApiResponse<List<ResponseDoctor>>> getAllDoctor() {
+        
+        List<ResponseDoctor> responseUser = this.userService.getAllDoctor();
+        return new ResponseEntity<>(new ApiResponse<>(200 , responseUser , "Succesfully find the username"),HttpStatus.OK);
+    }
+    @GetMapping("/get-user-email")
+    public ResponseEntity<ApiResponse<ResponseUser>> getUserEmailController(@RequestParam MultiValueMap<String, String> requestParams) {
+        String email = requestParams.getFirst("email");
+        ResponseUser responseUser = this.userService.getUserFromEmail(email);
+        return new ResponseEntity<>(new ApiResponse<>(200 , responseUser , "Succesfully find the username"),HttpStatus.OK);
+    }
+
+    @GetMapping("/get-user-demographic/{id}")
+    public ResponseEntity<ApiResponse<ResponseDemographics>> getUserDemographicController(@PathVariable int id) {
+        
+        ResponseDemographics responseUser = this.userService.getUserDemographics(id);
+        return new ResponseEntity<>(new ApiResponse<>(200 , responseUser , "Succesfully find the username"),HttpStatus.OK);
+    }
+
+    
     
     
 }
