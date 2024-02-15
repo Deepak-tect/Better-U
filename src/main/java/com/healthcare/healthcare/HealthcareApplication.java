@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+
 import com.healthcare.healthcare.Constants.AppConstant;
 import com.healthcare.healthcare.Models.Role;
 import com.healthcare.healthcare.Models.User;
@@ -19,6 +20,8 @@ public class HealthcareApplication implements CommandLineRunner {
 
 	@Autowired
 	private RoleRepo roleRepo;
+
+	
 	public static void main(String[] args) {
 		SpringApplication.run(HealthcareApplication.class, args);
 		System.out.println("--------------------Welcome------------------------");
@@ -36,9 +39,9 @@ public class HealthcareApplication implements CommandLineRunner {
 	}
 	@Override
 	public void run(String... args) throws Exception {
-		Role role1 = new Role(AppConstant.Admin , "ROLE_ADMIN");
-		Role role2 = new Role(AppConstant.User , "ROLE_USER");
-		Role role3 = new Role(AppConstant.Doctor , "ROLE_DOCTOR");
+		Role role1 = new Role(AppConstant.Admin , "ADMIN");
+		Role role2 = new Role(AppConstant.User , "USER");
+		Role role3 = new Role(AppConstant.Doctor , "DOCTOR");
 		roleRepo.save(role1);
 		roleRepo.save(role2);
 		roleRepo.save(role3);

@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,6 +18,7 @@ import com.healthcare.healthcare.Security.JwtAuthenticationEntryPoint;
 import com.healthcare.healthcare.Security.JwtAuthenticationFilter;
 
 @Configuration
+@EnableMethodSecurity
 public class SecurityConfig {
     @Autowired
     private JwtAuthenticationEntryPoint point;
@@ -43,19 +45,12 @@ public class SecurityConfig {
         return http.build();
     }
 
-    // @Bean
-    // public AuthenticationManager authenticationManager(HttpSecurity http)
-    //         throws Exception {
-    //     AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-    //     authenticationManagerBuilder.userDetailsService(appConfig.userDetailsService()).passwordEncoder(appConfig.passwordEncoder());
-    //     return authenticationManagerBuilder.build();
-    // }
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration builder)
             throws Exception {
         return builder.getAuthenticationManager();
     }
-    //25:48
+
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider(){
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();

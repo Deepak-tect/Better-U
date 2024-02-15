@@ -1,9 +1,12 @@
 package com.healthcare.healthcare.Models;
 
 
+import java.util.*;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -115,13 +118,13 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        List<Role> roles = new ArrayList<>();
+        roles.add(this.getRoles());
+        List<SimpleGrantedAuthority> authoritiesList = roles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.getRole()))
+                .collect(Collectors.toList());
+        return authoritiesList;
     }
-
-    // @Override
-    // public String getUsername() {
-    //     return this.email;
-    // }
 
     @Override
     public boolean isAccountNonExpired() {
