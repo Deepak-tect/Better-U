@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.healthcare.healthcare.Payloads.ResponseDemographics;
 import com.healthcare.healthcare.Payloads.ResponseDoctor;
 import com.healthcare.healthcare.Payloads.ResponsePatients;
@@ -85,6 +86,15 @@ public class UserController {
         ResponseDemographics responseUser = this.userService.getUserDemographics(id);
         return new ResponseEntity<>(new ApiResponse<>(200 , responseUser , "Succesfully find the username"),HttpStatus.OK);
     }
+
+    @PostMapping("/change-password")
+    @PreAuthorize("hasAnyAuthority('ADMIN','DOCTOR','USER')")
+    public ResponseEntity<ApiResponse<?>> postMethodName(@RequestBody JsonNode  entity) {
+        System.out.println(entity.get("password").asText());
+        this.userService.changePassword(entity.get("password").asText());
+        return new ResponseEntity<>(new ApiResponse<>(200 , null , "Successfully added password"),HttpStatus.OK);
+    }
+    
 
     
     

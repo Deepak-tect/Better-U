@@ -18,4 +18,5 @@ public interface UserService {
     public List<ResponseDoctor> getAllDoctor();
     public ResponseUser getUserFromEmail(String email);
     public ResponseDemographics getUserDemographics(int id);
+    public Boolean changePassword(String password); 
 }

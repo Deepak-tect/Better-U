@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -170,6 +171,14 @@ public class UserServiceImpl implements UserService {
             return this.modelMapper.map(demographics, ResponseDemographics.class);
         }
         throw new ResourceNotFoundExecption("User", "email", 0);
+    }
+
+    @Override
+    public Boolean changePassword(String password) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        user.setPassword(passwordEncoder.encode(password));
+        this.userRepo.save(user);
+        return true;
     }
     
 }
