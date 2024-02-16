@@ -24,8 +24,6 @@ import com.healthcare.healthcare.Services.UserService;
 import com.healthcare.healthcare.Utils.ApiResponse;
 
 
-
-
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {

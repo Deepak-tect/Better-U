@@ -10,9 +10,11 @@ import org.springframework.context.annotation.Bean;
 
 
 import com.healthcare.healthcare.Constants.AppConstant;
+import com.healthcare.healthcare.Models.Mood;
 import com.healthcare.healthcare.Models.Role;
 import com.healthcare.healthcare.Models.User;
 import com.healthcare.healthcare.Payloads.ResponseUser;
+import com.healthcare.healthcare.Repositories.MoodRepo;
 import com.healthcare.healthcare.Repositories.RoleRepo;
 
 @SpringBootApplication
@@ -20,6 +22,9 @@ public class HealthcareApplication implements CommandLineRunner {
 
 	@Autowired
 	private RoleRepo roleRepo;
+
+	@Autowired
+	private MoodRepo moodRepo;
 
 	
 	public static void main(String[] args) {
@@ -46,6 +51,16 @@ public class HealthcareApplication implements CommandLineRunner {
 		roleRepo.save(role2);
 		roleRepo.save(role3);
 
+		Mood mood1 = new Mood(AppConstant.Happy, "Happy" , AppConstant.HappyDescription);
+		Mood mood2 = new Mood(AppConstant.Confused, "Confused" , AppConstant.ConfusedDescription);
+		Mood mood3 = new Mood(AppConstant.Sad, "Sad" , AppConstant.SadDescription);
+		Mood mood4 = new Mood(AppConstant.Anxious, "Anxious" , AppConstant.AnxiousDescription);
+		Mood mood5 = new Mood(AppConstant.Disprassed, "Disprassed" , AppConstant.DisprassedDescription);
+		moodRepo.save(mood1);
+		moodRepo.save(mood2);
+		moodRepo.save(mood3);
+		moodRepo.save(mood4);
+		moodRepo.save(mood5);
 	}
 
 }

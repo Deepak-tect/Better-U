@@ -38,7 +38,10 @@ public class SecurityConfig {
 
         http.csrf(csrf -> csrf.disable())
             .cors(cors->cors.disable())
-            .authorizeHttpRequests(auth->auth.requestMatchers("/auth/**").permitAll().requestMatchers("/api/v1/users/create-user").permitAll().anyRequest().authenticated())
+            .authorizeHttpRequests(auth->auth.requestMatchers("/auth/**").permitAll().requestMatchers("/api/v1/users/create-user").permitAll()
+            .requestMatchers("/api/v1/users/add-patient").permitAll()
+            .requestMatchers("/api/v1/patients/get-mood-patient/**").permitAll()
+            .anyRequest().authenticated())
             .exceptionHandling(ex -> ex.authenticationEntryPoint(point))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
