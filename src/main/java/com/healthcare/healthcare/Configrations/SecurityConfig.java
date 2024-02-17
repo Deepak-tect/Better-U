@@ -40,6 +40,7 @@ public class SecurityConfig {
             .cors(cors->cors.disable())
             .authorizeHttpRequests(auth->auth.requestMatchers("/auth/**").permitAll().requestMatchers("/api/v1/users/create-user").permitAll()
             .requestMatchers("/api/v1/users/add-patient").permitAll()
+            .requestMatchers("/api/v1/patients/add-medical-history").permitAll()
             .requestMatchers("/api/v1/patients/get-mood-patient/**").permitAll()
             .anyRequest().authenticated())
             .exceptionHandling(ex -> ex.authenticationEntryPoint(point))

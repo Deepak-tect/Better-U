@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.healthcare.healthcare.Exceptions.ResourceNotFoundExecption;
+import com.healthcare.healthcare.Payloads.ResponseMedicalHistory;
 import com.healthcare.healthcare.Payloads.ResponseMood;
 import com.healthcare.healthcare.Services.PatientService;
 import com.healthcare.healthcare.Utils.ApiResponse;
@@ -58,6 +59,13 @@ public class PatientController {
         List<ResponseMood> result = this.patientService.getPatientMood(id);
         return new ResponseEntity<>(new ApiResponse<>(200 , result , "successully fetch the mood"),HttpStatus.OK);
     }
+
+    @PostMapping("/add-medical-history")
+    public ResponseEntity<ApiResponse<ResponseMedicalHistory>> postMethodName(@RequestBody ResponseMedicalHistory entity) {
+        ResponseMedicalHistory responseMedicalHistory = this.patientService.addPatientMedicalHistory(entity);
+        return new ResponseEntity<>(new ApiResponse<>(201 , responseMedicalHistory, "Successfully added medical history"),HttpStatus.CREATED);
+    }
+    
     
     
     

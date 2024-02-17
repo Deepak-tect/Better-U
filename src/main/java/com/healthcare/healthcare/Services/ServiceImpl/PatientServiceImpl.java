@@ -7,11 +7,15 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.healthcare.healthcare.Exceptions.ResourceNotFoundExecption;
+import com.healthcare.healthcare.Models.MedicalHistroy;
 import com.healthcare.healthcare.Models.Mood;
 import com.healthcare.healthcare.Models.Patient;
 import com.healthcare.healthcare.Models.PatientMood;
 import com.healthcare.healthcare.Models.User;
+import com.healthcare.healthcare.Payloads.ResponseMedicalHistory;
 import com.healthcare.healthcare.Payloads.ResponseMood;
+import com.healthcare.healthcare.Payloads.ResponsePatients;
+import com.healthcare.healthcare.Repositories.MedicalHistoryRepo;
 import com.healthcare.healthcare.Repositories.MoodRepo;
 import com.healthcare.healthcare.Repositories.PatientMoodRepo;
 import com.healthcare.healthcare.Repositories.PatientRepo;
@@ -32,6 +36,9 @@ public class PatientServiceImpl implements PatientService {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private MedicalHistoryRepo medicalHistoryRepo;
 
     @Override
     public void addPatientMood(JsonNode moods) {
@@ -71,6 +78,24 @@ public class PatientServiceImpl implements PatientService {
             return result;
         }
         throw new ResourceNotFoundExecption("id", "patient not found", id);
+    }
+
+    @Override
+    public ResponseMedicalHistory addPatientMedicalHistory(ResponseMedicalHistory responseMedicalHistory) {
+        Optional<Patient> optional = this.patientRepo.findById(responseMedicalHistory.getId());
+
+        if(optional.isPresent()){
+            Patient patient = optional.get();
+            MedicalHistroy medicalHistroy = this.modelMapper.map(responseMedicalHistory, MedicalHistroy.class);
+            medicalHistroy.setPatient(patient);
+            System.out.println(medicalHistroy);
+            this.medicalHistoryRepo.save(medicalHistroy);
+            ResponseMedicalHistory result = this.modelMapper.map(medicalHistroy, ResponseMedicalHistory.class);
+            result.setResponsePatients(this.modelMapper.map(patient, ResponsePatients.class));
+            return result;
+        }
+        
+        throw new ResourceNotFoundExecption("Patient id doesnot match", "ID", responseMedicalHistory.getId());
     }
     
 }

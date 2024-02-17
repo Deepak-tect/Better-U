@@ -1,5 +1,11 @@
 package com.healthcare.healthcare.Models;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -8,10 +14,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-
-import java.util.*;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 @Entity
@@ -35,19 +37,49 @@ public class Patient {
     @OneToMany(mappedBy = "patient" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     private List<PatientMood> patientMoods = new ArrayList<>();
 
+
+    @OneToOne(mappedBy = "patient" , fetch = FetchType.EAGER , cascade = CascadeType.ALL)
+    private MedicalHistroy medicalHistroy;
+
     public Patient() {
     }
 
+
+    // public Patient(int id, Date joiningDate, boolean wants_doc, User user, Doctor doctor) {
+    //     this.id = id;
+    //     this.joiningDate = joiningDate;
+    //     this.wants_doc = wants_doc;
+    //     this.user = user;
+    //     this.doctor = doctor;
+    // }
+
+    
     
 
-    public Patient(int id, Date joiningDate, boolean wants_doc, User user, Doctor doctor) {
+
+
+    public Patient(int id, Date joiningDate, boolean wants_doc, User user, Doctor doctor,
+            List<PatientMood> patientMoods, MedicalHistroy medicalHistroy) {
         this.id = id;
         this.joiningDate = joiningDate;
         this.wants_doc = wants_doc;
         this.user = user;
         this.doctor = doctor;
+        this.patientMoods = patientMoods;
+        this.medicalHistroy = medicalHistroy;
     }
-    
+
+
+
+    public MedicalHistroy getMedicalHistroy() {
+        return medicalHistroy;
+    }
+
+
+
+    public void setMedicalHistroy(MedicalHistroy medicalHistroy) {
+        this.medicalHistroy = medicalHistroy;
+    }
 
 
 
