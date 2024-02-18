@@ -17,8 +17,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.healthcare.healthcare.Exceptions.ResourceNotFoundExecption;
 import com.healthcare.healthcare.Payloads.ResponseMedicalHistory;
 import com.healthcare.healthcare.Payloads.ResponseMood;
+import com.healthcare.healthcare.Payloads.ResponsePatients;
 import com.healthcare.healthcare.Services.PatientService;
 import com.healthcare.healthcare.Utils.ApiResponse;
+
 
 
 
@@ -55,16 +57,39 @@ public class PatientController {
 
     @GetMapping("/get-patient-mood/{id}")
     @PreAuthorize("hasAuthority('DOCTOR')")
-    public ResponseEntity<ApiResponse<List<ResponseMood>>> getMethodName(@PathVariable int id) {
+    public ResponseEntity<ApiResponse<List<ResponseMood>>> getPatientMoodController(@PathVariable int id) {
         List<ResponseMood> result = this.patientService.getPatientMood(id);
         return new ResponseEntity<>(new ApiResponse<>(200 , result , "successully fetch the mood"),HttpStatus.OK);
     }
 
     @PostMapping("/add-medical-history")
-    public ResponseEntity<ApiResponse<ResponseMedicalHistory>> postMethodName(@RequestBody ResponseMedicalHistory entity) {
+    @PreAuthorize("hasAuthority('USER')")
+    public ResponseEntity<ApiResponse<ResponseMedicalHistory>> addPatientMedicalHistoryController(@RequestBody ResponseMedicalHistory entity) {
         ResponseMedicalHistory responseMedicalHistory = this.patientService.addPatientMedicalHistory(entity);
         return new ResponseEntity<>(new ApiResponse<>(201 , responseMedicalHistory, "Successfully added medical history"),HttpStatus.CREATED);
     }
+
+    @GetMapping("/get-patient-medical-history/{id}")
+    @PreAuthorize("hasAnyAuthority('DOCTOR')")
+    public ResponseEntity<ApiResponse<ResponseMedicalHistory>> getPatientMedicalHistoryDoctorController(@PathVariable int id) {
+        System.out.println(id);
+        ResponseMedicalHistory responseMedicalHistory = this.patientService.getPatientMedicalHistory(id);
+        return new ResponseEntity<>(new ApiResponse<>(201 , responseMedicalHistory, "Successfully added medical history"),HttpStatus.CREATED);
+    }
+    @GetMapping("/get-patient-medical-history/")
+    @PreAuthorize("hasAuthority('USER')")
+    public ResponseEntity<ApiResponse<ResponseMedicalHistory>> getPatientMedicalHistoryController() {
+        ResponseMedicalHistory responseMedicalHistory = this.patientService.getPatientMedicalHistory(-1);
+        return new ResponseEntity<>(new ApiResponse<>(201 , responseMedicalHistory, "Successfully added medical history"),HttpStatus.CREATED);
+    }
+
+    @GetMapping("/get-all-patients")
+    @PreAuthorize("hasAnyAuthority('DOCTOR','ADMIN')")
+    public ResponseEntity<ApiResponse<List<ResponsePatients>>> getAllPatientController() {
+        List<ResponsePatients> result = this.patientService.getAllPatients();
+        return new ResponseEntity<>(new ApiResponse<>(200 , result, "Successfully fetched all patient"),HttpStatus.CREATED);
+    }
+    
     
     
     

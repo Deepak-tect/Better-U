@@ -41,6 +41,10 @@ public class Patient {
     @OneToOne(mappedBy = "patient" , fetch = FetchType.EAGER , cascade = CascadeType.ALL)
     private MedicalHistroy medicalHistroy;
 
+
+    @OneToMany(mappedBy = "patient" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+    private List<Answer> answers = new ArrayList<>();
+
     public Patient() {
     }
 
@@ -52,10 +56,6 @@ public class Patient {
     //     this.user = user;
     //     this.doctor = doctor;
     // }
-
-    
-    
-
 
 
     public Patient(int id, Date joiningDate, boolean wants_doc, User user, Doctor doctor,
@@ -69,6 +69,17 @@ public class Patient {
         this.medicalHistroy = medicalHistroy;
     }
 
+    public Patient(int id, Date joiningDate, boolean wants_doc, User user, Doctor doctor,
+            List<PatientMood> patientMoods, MedicalHistroy medicalHistroy, List<Answer> answers) {
+        this.id = id;
+        this.joiningDate = joiningDate;
+        this.wants_doc = wants_doc;
+        this.user = user;
+        this.doctor = doctor;
+        this.patientMoods = patientMoods;
+        this.medicalHistroy = medicalHistroy;
+        this.answers = answers;
+    }
 
 
     public MedicalHistroy getMedicalHistroy() {
@@ -83,15 +94,15 @@ public class Patient {
 
 
 
-    public Patient(int id, Date joiningDate, boolean wants_doc, User user, Doctor doctor,
-            List<PatientMood> patientMoods) {
-        this.id = id;
-        this.joiningDate = joiningDate;
-        this.wants_doc = wants_doc;
-        this.user = user;
-        this.doctor = doctor;
-        this.patientMoods = patientMoods;
-    }
+    // public Patient(int id, Date joiningDate, boolean wants_doc, User user, Doctor doctor,
+    //         List<PatientMood> patientMoods) {
+    //     this.id = id;
+    //     this.joiningDate = joiningDate;
+    //     this.wants_doc = wants_doc;
+    //     this.user = user;
+    //     this.doctor = doctor;
+    //     this.patientMoods = patientMoods;
+    // }
     
 
 
@@ -154,6 +165,16 @@ public class Patient {
 
     public void setPatientMoods(List<PatientMood> patientMoods) {
         this.patientMoods = patientMoods;
+    }
+
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
     }
 
     

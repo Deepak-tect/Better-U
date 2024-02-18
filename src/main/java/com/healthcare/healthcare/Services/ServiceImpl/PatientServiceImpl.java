@@ -1,5 +1,10 @@
 package com.healthcare.healthcare.Services.ServiceImpl;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,7 +25,6 @@ import com.healthcare.healthcare.Repositories.MoodRepo;
 import com.healthcare.healthcare.Repositories.PatientMoodRepo;
 import com.healthcare.healthcare.Repositories.PatientRepo;
 import com.healthcare.healthcare.Services.PatientService;
-import java.util.*;
 
 @Service
 public class PatientServiceImpl implements PatientService {
@@ -43,7 +47,6 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public void addPatientMood(JsonNode moods) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println("user----------"+user.getPatient());
         Patient patient = user.getPatient();
         for(JsonNode id : moods){
             Optional<Mood> option = this.moodRepo.findById(id.asInt());
@@ -63,6 +66,7 @@ public class PatientServiceImpl implements PatientService {
         Mood mood = optional.get();
         System.out.println(mood.getPatientMoods());
     }
+    
     @Override
     public List<ResponseMood> getPatientMood(int id) {
         Optional<Patient> optional = this.patientRepo.findById(id);
@@ -96,6 +100,39 @@ public class PatientServiceImpl implements PatientService {
         }
         
         throw new ResourceNotFoundExecption("Patient id doesnot match", "ID", responseMedicalHistory.getId());
+    }
+
+    @Override
+    public ResponseMedicalHistory getPatientMedicalHistory(int id) {
+        if(id == -1){
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            Patient patient = user.getPatient();
+            MedicalHistroy medicalHistroy = patient.getMedicalHistroy();
+            ResponseMedicalHistory result = this.modelMapper.map(medicalHistroy, ResponseMedicalHistory.class);
+            result.setResponsePatients(this.modelMapper.map(patient, ResponsePatients.class));
+            return result;
+        }
+        Optional<Patient> optional = this.patientRepo.findById(id);
+
+        if(optional.isPresent()){
+            Patient patient = optional.get();
+            MedicalHistroy medicalHistroy = patient.getMedicalHistroy();
+            ResponseMedicalHistory result = this.modelMapper.map(medicalHistroy, ResponseMedicalHistory.class);
+            result.setResponsePatients(this.modelMapper.map(patient, ResponsePatients.class));
+            return result;
+        }
+        throw new ResourceNotFoundExecption("Patient id doesnot match", "ID", id);
+    
+    }
+
+    @Override
+    public List<ResponsePatients> getAllPatients() {
+        List<Patient> patients = this.patientRepo.findAll();
+        List<ResponsePatients> result = new ArrayList<>();
+        for(Patient patient : patients){
+            result.add(this.modelMapper.map(patient, ResponsePatients.class));
+        }
+        return result;
     }
     
 }
