@@ -12,14 +12,17 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.healthcare.healthcare.Exceptions.ResourceNotFoundExecption;
+import com.healthcare.healthcare.Models.Doctor;
 import com.healthcare.healthcare.Models.MedicalHistroy;
 import com.healthcare.healthcare.Models.Mood;
 import com.healthcare.healthcare.Models.Patient;
 import com.healthcare.healthcare.Models.PatientMood;
 import com.healthcare.healthcare.Models.User;
+import com.healthcare.healthcare.Payloads.ResponseDoctor;
 import com.healthcare.healthcare.Payloads.ResponseMedicalHistory;
 import com.healthcare.healthcare.Payloads.ResponseMood;
 import com.healthcare.healthcare.Payloads.ResponsePatients;
+import com.healthcare.healthcare.Repositories.DoctorRepo;
 import com.healthcare.healthcare.Repositories.MedicalHistoryRepo;
 import com.healthcare.healthcare.Repositories.MoodRepo;
 import com.healthcare.healthcare.Repositories.PatientMoodRepo;
@@ -43,6 +46,9 @@ public class PatientServiceImpl implements PatientService {
 
     @Autowired
     private MedicalHistoryRepo medicalHistoryRepo;
+
+    @Autowired
+    private DoctorRepo doctorRepo;
 
     @Override
     public void addPatientMood(JsonNode moods) {
@@ -130,9 +136,27 @@ public class PatientServiceImpl implements PatientService {
         List<Patient> patients = this.patientRepo.findAll();
         List<ResponsePatients> result = new ArrayList<>();
         for(Patient patient : patients){
-            result.add(this.modelMapper.map(patient, ResponsePatients.class));
+            ResponsePatients responsePatients = this.modelMapper.map(patient, ResponsePatients.class);
+            // responsePatients.setResponseDoctor(this.modelMapper.map(patient.getDoctor(), ResponseDoctor.class));
+            result.add(responsePatients);
         }
         return result;
+    }
+
+    @Override
+    public ResponsePatients assignDoctor(int id) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Patient patient = user.getPatient();
+        Optional<Doctor> optional = this.doctorRepo.findById(id);
+        if(optional.isPresent()){
+            Doctor doctor  = optional.get();
+            patient.setDoctor(doctor);
+            this.patientRepo.save(patient);
+            ResponsePatients responsePatients = this.modelMapper.map(patient, ResponsePatients.class);
+            responsePatients.setResponseDoctor(this.modelMapper.map(doctor, ResponseDoctor.class));
+            return responsePatients;
+        }
+        throw new ResourceNotFoundExecption("Doctor id does not match", "ID", id);
     }
     
 }

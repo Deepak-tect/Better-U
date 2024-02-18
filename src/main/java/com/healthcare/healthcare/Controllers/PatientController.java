@@ -89,6 +89,15 @@ public class PatientController {
         List<ResponsePatients> result = this.patientService.getAllPatients();
         return new ResponseEntity<>(new ApiResponse<>(200 , result, "Successfully fetched all patient"),HttpStatus.CREATED);
     }
+
+
+    @PostMapping("/assign-doctor/{id}")
+    @PreAuthorize("hasAuthority('USER')")
+    public ResponseEntity<ApiResponse<ResponsePatients>> assignDoctorToPatientController(@PathVariable int id) {
+        ResponsePatients responsePatients = this.patientService.assignDoctor(id);
+        return new ResponseEntity<>(new ApiResponse<>(200 , responsePatients, "Successfully assigned doctor"),HttpStatus.OK);    
+    }
+    
     
     
     

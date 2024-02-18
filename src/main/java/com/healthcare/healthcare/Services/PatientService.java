@@ -14,4 +14,5 @@ public interface PatientService {
     public ResponseMedicalHistory addPatientMedicalHistory(ResponseMedicalHistory responseMedicalHistory);
     public ResponseMedicalHistory getPatientMedicalHistory(int id);
     public List<ResponsePatients> getAllPatients();
+    public ResponsePatients assignDoctor(int id);
 }

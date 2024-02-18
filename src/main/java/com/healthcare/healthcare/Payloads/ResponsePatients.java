@@ -8,6 +8,7 @@ public class ResponsePatients {
     private Date joiningDate;
     private boolean wants_doc;
     private ResponseUser user;
+    private ResponseDoctor responseDoctor;
     public ResponsePatients() {
         this.joiningDate = new Date();
     }
@@ -15,6 +16,15 @@ public class ResponsePatients {
         this.id = id;
         this.wants_doc = wants_doc;
         this.user = user;
+    }
+    
+    public ResponsePatients(int id, Date joiningDate, boolean wants_doc, ResponseUser user,
+            ResponseDoctor responseDoctor) {
+        this.id = id;
+        this.joiningDate = joiningDate;
+        this.wants_doc = wants_doc;
+        this.user = user;
+        this.responseDoctor = responseDoctor;
     }
     public int getId() {
         return id;
@@ -41,10 +51,17 @@ public class ResponsePatients {
     public void setUser(ResponseUser user) {
         this.user = user;
     }
+    
     @Override
     public String toString() {
         return "ResponsePatients [id=" + id + ", joiningDate=" + joiningDate + ", wants_doc=" + wants_doc + ", user="
                 + user + "]";
+    }
+    public ResponseDoctor getResponseDoctor() {
+        return responseDoctor;
+    }
+    public void setResponseDoctor(ResponseDoctor responseDoctor) {
+        this.responseDoctor = responseDoctor;
     }
     
 }
