@@ -42,6 +42,7 @@ public class SecurityConfig {
             .requestMatchers("/api/v1/users/add-patient").permitAll()
             .requestMatchers("/api/v1/patients/add-medical-history").permitAll()
             .requestMatchers("/api/v1/patients/get-mood-patient/**").permitAll()
+            .requestMatchers("/api/v1/question/add-question").permitAll()
             .anyRequest().authenticated())
             .exceptionHandling(ex -> ex.authenticationEntryPoint(point))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
