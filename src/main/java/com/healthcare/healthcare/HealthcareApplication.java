@@ -26,7 +26,6 @@ public class HealthcareApplication implements CommandLineRunner {
 	@Autowired
 	private MoodRepo moodRepo;
 
-	
 	public static void main(String[] args) {
 		SpringApplication.run(HealthcareApplication.class, args);
 		System.out.println("--------------------Welcome------------------------");

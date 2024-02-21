@@ -6,6 +6,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -19,6 +20,7 @@ public class Item {
     @OneToOne(mappedBy = "item" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     private Activity activity;
 
+
     public Item() {
     }
 
@@ -26,6 +28,7 @@ public class Item {
         this.id = id;
         this.type = type;
         this.activity = activity;
+        
     }
 
     public int getId() {
@@ -51,6 +54,10 @@ public class Item {
     public void setActivity(Activity activity) {
         this.activity = activity;
     }
+
+    
+
+    
 
     
 

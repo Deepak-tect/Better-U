@@ -29,6 +29,9 @@ public class Doctor {
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     private List<Patient> patients;
 
+    @OneToMany(mappedBy = "doctor" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+    private List<Assignment> assingment = new ArrayList<>();
+
     public Doctor() {
     }
 
@@ -37,6 +40,15 @@ public class Doctor {
         this.user = user;
         this.doctorDetails = doctorDetails;
         this.patients = patients;
+    }
+    
+
+    public Doctor(int id, User user, DoctorDetails doctorDetails, List<Patient> patients, List<Assignment> assingment) {
+        this.id = id;
+        this.user = user;
+        this.doctorDetails = doctorDetails;
+        this.patients = patients;
+        this.assingment = assingment;
     }
 
     public int getId() {
@@ -70,11 +82,18 @@ public class Doctor {
     public void setPatients(List<Patient> patients) {
         this.patients = patients;
     }
+    
+    public List<Assignment> getAssingment() {
+        return assingment;
+    }
 
+    public void setAssingment(List<Assignment> assingment) {
+        this.assingment = assingment;
+    }
+    
     @Override
     public String toString() {
         return "Doctor [id=" + id + ", user=" + user + ", doctorDetails=" + doctorDetails + ", patients=" + patients
                 + "]";
     }
-    
 }

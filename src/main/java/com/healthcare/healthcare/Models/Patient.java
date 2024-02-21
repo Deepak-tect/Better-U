@@ -45,32 +45,16 @@ public class Patient {
     @OneToMany(mappedBy = "patient" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     private List<Answer> answers = new ArrayList<>();
 
+    @OneToMany(mappedBy = "patient" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+    private List<Assignment> assingment = new ArrayList<>();
+
     public Patient() {
     }
 
 
-    // public Patient(int id, Date joiningDate, boolean wants_doc, User user, Doctor doctor) {
-    //     this.id = id;
-    //     this.joiningDate = joiningDate;
-    //     this.wants_doc = wants_doc;
-    //     this.user = user;
-    //     this.doctor = doctor;
-    // }
-
-
     public Patient(int id, Date joiningDate, boolean wants_doc, User user, Doctor doctor,
-            List<PatientMood> patientMoods, MedicalHistroy medicalHistroy) {
-        this.id = id;
-        this.joiningDate = joiningDate;
-        this.wants_doc = wants_doc;
-        this.user = user;
-        this.doctor = doctor;
-        this.patientMoods = patientMoods;
-        this.medicalHistroy = medicalHistroy;
-    }
-
-    public Patient(int id, Date joiningDate, boolean wants_doc, User user, Doctor doctor,
-            List<PatientMood> patientMoods, MedicalHistroy medicalHistroy, List<Answer> answers) {
+            List<PatientMood> patientMoods, MedicalHistroy medicalHistroy, List<Answer> answers,
+            List<Assignment> assingment) {
         this.id = id;
         this.joiningDate = joiningDate;
         this.wants_doc = wants_doc;
@@ -79,6 +63,7 @@ public class Patient {
         this.patientMoods = patientMoods;
         this.medicalHistroy = medicalHistroy;
         this.answers = answers;
+        this.assingment = assingment;
     }
 
 
@@ -91,21 +76,6 @@ public class Patient {
     public void setMedicalHistroy(MedicalHistroy medicalHistroy) {
         this.medicalHistroy = medicalHistroy;
     }
-
-
-
-    // public Patient(int id, Date joiningDate, boolean wants_doc, User user, Doctor doctor,
-    //         List<PatientMood> patientMoods) {
-    //     this.id = id;
-    //     this.joiningDate = joiningDate;
-    //     this.wants_doc = wants_doc;
-    //     this.user = user;
-    //     this.doctor = doctor;
-    //     this.patientMoods = patientMoods;
-    // }
-    
-
-
 
     public int getId() {
         return id;
@@ -147,16 +117,6 @@ public class Patient {
         this.doctor = doctor;
     }
 
-
-
-    @Override
-    public String toString() {
-        return "Patient [id=" + id + ", joiningDate=" + joiningDate + ", wants_doc=" + wants_doc + ", user=" + user
-                + ", doctor=" + doctor + "]";
-    }
-
-
-
     public List<PatientMood> getPatientMoods() {
         return patientMoods;
     }
@@ -177,8 +137,23 @@ public class Patient {
         this.answers = answers;
     }
 
-    
 
+    public List<Assignment> getAssingment() {
+        return assingment;
+    }
+
+
+    public void setAssingment(List<Assignment> assingment) {
+        this.assingment = assingment;
+    }
+
+
+    // @Override
+    // public String toString() {
+    //     return "Patient [id=" + id + ", joiningDate=" + joiningDate + ", wants_doc=" + wants_doc + ", user=" + user
+    //             + ", doctor=" + doctor + ", patientMoods=" + patientMoods + ", medicalHistroy=" + medicalHistroy
+    //             + ", answers=" + answers + ", assingment=" + assingment + "]";
+    // }
     
 
 }

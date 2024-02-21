@@ -29,17 +29,21 @@ public class Activity {
     @OneToMany(mappedBy = "activity" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     private List<Question> questions = new ArrayList<>();
 
+    @OneToMany(mappedBy = "activity")
+    private List<AssignmentActivity> assignmentActivities = new ArrayList<>();
+
     public Activity() {
     }
 
-    public Activity(int id, String name, String description, Item item, List<Question> questions) {
+    public Activity(int id, String name, String description, Item item, List<Question> questions,
+            List<AssignmentActivity> assignmentActivities) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.item = item;
         this.questions = questions;
+        this.assignmentActivities = assignmentActivities;
     }
-
 
     public int getId() {
         return id;
@@ -57,28 +61,21 @@ public class Activity {
         this.name = name;
     }
 
-
     public String getDescription() {
         return description;
     }
-
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-
     public Item getItem() {
         return item;
     }
 
-
     public void setItem(Item item) {
         this.item = item;
     }
-
-    
-
 
     public List<Question> getQuestions() {
         return questions;
@@ -88,6 +85,17 @@ public class Activity {
         this.questions = questions;
     }
 
+    public List<AssignmentActivity> getAssignmentActivities() {
+        return assignmentActivities;
+    }
+
+    public void setAssignmentActivities(List<AssignmentActivity> assignmentActivities) {
+        this.assignmentActivities = assignmentActivities;
+    }
+
+    
+    
+    
     
 
 
