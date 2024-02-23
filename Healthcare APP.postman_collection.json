@@ -1,0 +1,1015 @@
+{
+	"info": {
+		"_postman_id": "59c28e26-edb9-42ef-bbfb-3387f9b4e1a1",
+		"name": "Healthcare APP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24488437"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMTdAZ21haWwuY29tIiwiaWF0IjoxNzA3OTY5NjE2LCJleHAiOjE3MDc5ODc2MTZ9.CKXPU_gfE1LFgRBHC9Q_7R3ua3HfZW0ILCqKq37Zs33wJdT-SnHqp6NvBe_ushNeihsQbPgChgXjwlZOCXr97g",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"user20@gmail.com\",\r\n  \"password\": \"1234\",\r\n  \"role\": 2,\r\n  \"demographics\": {\r\n    \"firstName\": \"user20\",\r\n    \"lastName\": \"Dao\",\r\n    \"dob\": \"1975-01-01\",\r\n    \"sex\": \"Male\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8999/api/v1/users/create-user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"create-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8999/api/v1/users/get-user/1452",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"get-user",
+								"1452"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check email",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8999/api/v1/users/check-email?email=user14@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"check-email"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "user14@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user using email",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMTZAZ21haWwuY29tIiwiaWF0IjoxNzA3OTY4OTI3LCJleHAiOjE3MDc5ODY5Mjd9.IaX79ZDwD7sAXUiGtnQZAJT7lvUYFBLcQkwsV3GOm79YMfjP121-RzVqld1Utnc5JLiU8cOhtW7qF3Lsb1NjUQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8999/api/v1/users/get-user-email?email=user19@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"get-user-email"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "user19@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add patient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1602,\r\n    \"wants_doc\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8999/api/v1/users/add-patient",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"add-patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add doctor with details",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMTZAZ21haWwuY29tIiwiaWF0IjoxNzA3OTY4OTI3LCJleHAiOjE3MDc5ODY5Mjd9.IaX79ZDwD7sAXUiGtnQZAJT7lvUYFBLcQkwsV3GOm79YMfjP121-RzVqld1Utnc5JLiU8cOhtW7qF3Lsb1NjUQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1554,\r\n    \"doctorDetails\":{\r\n        \"qualification\":\"MBBS\",\r\n        \"specialization\":\"Brain\",\r\n        \"experience\":20\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8999/api/v1/users/add-doctor",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"add-doctor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all doctors",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMTlAZ21haWwuY29tIiwiaWF0IjoxNzA4NDEwMzk3LCJleHAiOjE3MDg0MjgzOTd9.AXw2rXCGbj4-5xI_gbiauw89Nfa9vZ47BuN93c4X9iQMtgi6aLoczXBlGJd_y7wOjYwPx-RUMe64Daq-rnRQ7w",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8999/api/v1/users/get-doctors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"get-doctors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user demographics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8999/api/v1/users/get-user-demographic/1452",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"get-user-demographic",
+								"1452"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"user19@gmail.com\",\r\n    \"password\":\"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8999/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMTdAZ21haWwuY29tIiwiaWF0IjoxNzA4MDYzOTE0LCJleHAiOjE3MDgwODE5MTR9._cQul817m84hrbx9YO3bqfJ9XV0Dtsw95IXLKI1PbSEoQ0V77cpLkpTSTkxOjPKYZMV9Ov2yNz8hLlQzC1nWng",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\":\"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8999/api/v1/users/change-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Patients",
+			"item": [
+				{
+					"name": "add patient mood",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMTdAZ21haWwuY29tIiwiaWF0IjoxNzA4MDY4MjQ2LCJleHAiOjE3MDgwODYyNDZ9.QTxYgzrovY9o93P7lP_J21j6wMK2Ri8DMl7RtpCJqtsnM2aJhoqf5V6gRGe8kxQ1qhT7VKa3oi4w9BisbSIPYw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mood\":[2,3]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8999/api/v1/patients/add-mood",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"patients",
+								"add-mood"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8999/api/v1/patients/get-mood-patient/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"patients",
+								"get-mood-patient",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get patient mood",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMTlAZ21haWwuY29tIiwiaWF0IjoxNzA4MDc3OTI2LCJleHAiOjE3MDgwOTU5MjZ9.m13pyMoQ2hsNLJ7Kx-asMDmG_JRPgrqAsch89sC4uFFTvqybU1TJV21pWebhPFzkMk6UZz2jy3aUqc6J9kSPmQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8999/api/v1/patients/get-patient-mood/1553",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"patients",
+								"get-patient-mood",
+								"1553"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Medical history",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1602,\r\n    \"height\":160,\r\n    \"weight\":55,\r\n    \"is_smoker\":true,\r\n    \"drinks_alcohol\":true,\r\n    \"diseases\":\"bone\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8999/api/v1/patients/add-medical-history",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"patients",
+								"add-medical-history"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get patient medical history user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMThAZ21haWwuY29tIiwiaWF0IjoxNzA4MTQxMzcxLCJleHAiOjE3MDgxNTkzNzF9.kB7xbytn10n_N-TgReeI2dw16ODZj96IASJj7AB0YPHwEPpZqooKIQ7VIorpOZbHDSPgv3ICDHSlIcdjjbLEHA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8999/api/v1/patients/get-patient-medical-history/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"patients",
+								"get-patient-medical-history",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get patient medical history userby doctor",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMTlAZ21haWwuY29tIiwiaWF0IjoxNzA4MTQxNTY1LCJleHAiOjE3MDgxNTk1NjV9.B4_qTPdosMbqCCd5yK2OC2yJpj2ryVjSFkwAE75QhcEbuubiM8HDtdIuwRztgPeTziOfj9dnsJddgLuTnjJMMA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8999/api/v1/patients/get-patient-medical-history/1602",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"patients",
+								"get-patient-medical-history",
+								"1602"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all patient",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMTlAZ21haWwuY29tIiwiaWF0IjoxNzA4MjM1MDkyLCJleHAiOjE3MDgyNTMwOTJ9.opSlXTTSIKIKdaRcUzc2XL1hUyCXUYk95w9i03mS9_nxLRvCxftexIMztlYQ2ypSSSWan4NL3UmlzF-e_QttTg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8999/api/v1/patients/get-all-patients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"patients",
+								"get-all-patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assign doctor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMjBAZ21haWwuY29tIiwiaWF0IjoxNzA4NDE4NDQ4LCJleHAiOjE3MDg0MzY0NDh9.7C5kr5q26s-2QMd7j0LKUj52CQK5laMyVWqw75pt9qbXb2xZdu3KUhbMa-aSF4AOQLltuGFlibKx0yoL4z8Ivw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8999/api/v1/patients/assign-doctor/1554",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"patients",
+								"assign-doctor",
+								"1554"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Item",
+			"item": [
+				{
+					"name": "Add item",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMTdAZ21haWwuY29tIiwiaWF0IjoxNzA4NDg3OTA1LCJleHAiOjE3MDg1MDU5MDV9.jPGP2EYHFkFJmbSIlEHdP_6l_W9A6s_rel2Kvz1EgTyNElmqNdGR0FWOWaFsuUbfHV3br0kjCbNhlTiL6A185A",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\":\"Activity\",\r\n    \"activity\":{\r\n        \"name\":\"Assignment 6\",\r\n        \"description\":\"different assignment were given to test patients\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8999/api/v1/item/createItem",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"item",
+								"createItem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get item by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMTlAZ21haWwuY29tIiwiaWF0IjoxNzA4MzkzMzg5LCJleHAiOjE3MDg0MTEzODl9.EanqnxnnA1HMVX9AlC3NsDF25Tc0t-PS46OwlooG3mxsI0i5zSbNZLU_3PeHSOHtmMkw8McdlO_oqX1Tg4QC6w",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8999/api/v1/item/get-Item/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"item",
+								"get-Item",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Questions",
+			"item": [
+				{
+					"name": "Add question",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMTdAZ21haWwuY29tIiwiaWF0IjoxNzA4NDg3OTA1LCJleHAiOjE3MDg1MDU5MDV9.jPGP2EYHFkFJmbSIlEHdP_6l_W9A6s_rel2Kvz1EgTyNElmqNdGR0FWOWaFsuUbfHV3br0kjCbNhlTiL6A185A",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"question_title\":\"This is the two question\",\r\n    \"option\":[\r\n        {\r\n            \"optionType\":\"option 1\"\r\n        },\r\n        {\r\n            \"optionType\":\"option 2\"\r\n        },\r\n        {\r\n            \"optionType\":\"option 3\"\r\n        },\r\n        {\r\n            \"optionType\":\"option 4\"\r\n        }\r\n\r\n    ],\r\n    \"activity\":6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8999/api/v1/question/add-question",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"question",
+								"add-question"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all question",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMTdAZ21haWwuY29tIiwiaWF0IjoxNzA4NDAwNDY3LCJleHAiOjE3MDg0MTg0Njd9.-KdLX8TUyDvKT66zG_fAZiTd6bfcjYRJGOStnJ4SbFABg5hrEOawpl5ybtw36hYlbowm82wNhz0_D2j1vSMHrA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8999/api/v1/question/get-question",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"question",
+								"get-question"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Doctors",
+			"item": [
+				{
+					"name": "Get patients of doctor",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMTlAZ21haWwuY29tIiwiaWF0IjoxNzA4NDEwMzk3LCJleHAiOjE3MDg0MjgzOTd9.AXw2rXCGbj4-5xI_gbiauw89Nfa9vZ47BuN93c4X9iQMtgi6aLoczXBlGJd_y7wOjYwPx-RUMe64Daq-rnRQ7w",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8999/api/v1/doctor/doctors-patients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"doctor",
+								"doctors-patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get doctor details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMTlAZ21haWwuY29tIiwiaWF0IjoxNzA4NDEwMzk3LCJleHAiOjE3MDg0MjgzOTd9.AXw2rXCGbj4-5xI_gbiauw89Nfa9vZ47BuN93c4X9iQMtgi6aLoczXBlGJd_y7wOjYwPx-RUMe64Daq-rnRQ7w",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8999/api/v1/doctor/doctors-details/1554",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"doctor",
+								"doctors-details",
+								"1554"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Demographics",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMTlAZ21haWwuY29tIiwiaWF0IjoxNzA4NDM1NzM2LCJleHAiOjE3MDg0NTM3MzZ9.scO85-wQj3iPrIzmQ6VyV98oQugZS70GKw8h0sKK1kePDcMAdBNn-2JHW7daG7b5Z8ZIl9UfgMKmgqGmvvtvCg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8999/api/v1/demographic/1602",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"demographic",
+								"1602"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMjBAZ21haWwuY29tIiwiaWF0IjoxNzA4NDc2NTY1LCJleHAiOjE3MDg0OTQ1NjV9.mcJnFCsx1RpVKol0s6XCLHCmch-2pfSF39CcZLPpsmSIyGnvSiYMFIJc4hIKVF_c2q3lqTFYfVHQ95vERgN5qg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"user20\",\r\n    \"lastName\": \"oops\",\r\n    \"dob\": \"1974-01-09\",\r\n    \"sex\": \"Male\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8999/api/v1/demographic/update-demographics",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"demographic",
+								"update-demographics"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Assignment",
+			"item": [
+				{
+					"name": "Add assignments",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMTlAZ21haWwuY29tIiwiaWF0IjoxNzA4NTAzMzc2LCJleHAiOjE3MDg1MjEzNzZ9.YXopKBr3u1IwTCLgS7s315SPbJ8rCReFMHmZvEWZ2duAJHuh3vk0B8msKikHGV2bVNnB1fc4cewYW5VVDyad9Q",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1602,\r\n    \"activity\":[\r\n        1,2,3\r\n    ],\r\n    \"item_level\":1,\r\n    \"completed\":false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8999/api/v1/assignment/add-assignment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"assignment",
+								"add-assignment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get assignment by patient",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMjBAZ21haWwuY29tIiwiaWF0IjoxNzA4NTE3NTc2LCJleHAiOjE3MDg1MzU1NzZ9.l86rtBsoef6nZkaYe2up3VHhX7OI7ooRlW2kNh2s4KvrzmdNLv7TLFDh5uMXfMY0h_G0fVq5fskDm0e-wtos_g",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8999/api/v1/assignment/get-assignment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"assignment",
+								"get-assignment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get assignment of patient by doctor",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMTlAZ21haWwuY29tIiwiaWF0IjoxNzA4NTE4NDA1LCJleHAiOjE3MDg1MzY0MDV9.q_5J5DBwi7Ob8_yDd-zd-4O2nqBiVrUnQH-m9T29u02rjeIZSxTadu1b-EbfgnZenZLCNY5iNdLQYyHTWbMYzA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8999/api/v1/assignment/get-assignment/1602",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"assignment",
+								"get-assignment",
+								"1602"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Answer",
+			"item": [
+				{
+					"name": "save answer of patient",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMjBAZ21haWwuY29tIiwiaWF0IjoxNzA4NTc4NTE3LCJleHAiOjE3MDg1OTY1MTd9.YZOSswzK-Ve699cvVw2Z5zzghBDUdJo9CeNp2C3elXHtUOic-scfcJC2T04sKxpFuNl3v2uJ7u53jEEJyhabxQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"questionId\": 102,\r\n    \"choice\": \"Option A\"\r\n  },\r\n  {\r\n    \"questionId\": 103,\r\n    \"choice\": \"Option B\"\r\n  },\r\n  {\r\n    \"questionId\": 152,\r\n    \"choice\": \"Option C\"\r\n  },\r\n  {\r\n    \"questionId\": 153,\r\n    \"choice\": \"Option C\"\r\n  },\r\n  {\r\n    \"questionId\": 154,\r\n    \"choice\": \"Option C\"\r\n  }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8999/api/v1/answer/save-answer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8999",
+							"path": [
+								"api",
+								"v1",
+								"answer",
+								"save-answer"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
